@@ -1,11 +1,11 @@
 # Food Recommendation System
 
-This is a Food Recommendation System that suggests dishes based on various features and descriptions. It uses content-based filtering techniques to provide personalized recommendations to users.
+This Food Recommendation System suggests meals based on different features and descriptions. It leverages content-based filtering techniques to deliver personalized recommendations to users.
 
 ## Features
 
-- **Basic Recommendation**: Recommends similar dishes based on the description of a given dish.
-- **Advanced Recommendation**: Recommends dishes based on category, vegetarian/non-vegetarian classification, and description.
+- **Basic Suggestions**: Provides similar food recommendations based on the description of a selected item.
+- **Advanced Suggestions**: Recommends food by taking into account categories, dietary preferences (vegetarian/non-vegetarian), and food descriptions.
 
 ## Technologies Used
 
