@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Recommendation System</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFFFCC, #87CEEB);
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #FF6F00;
+            color: #FFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        li {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Food Recommendation System</h1>
+    <form id="recommendationForm" method="POST" action="/recommend">
+        <label for="dishName">Enter Dish Name:</label>
+        <input type="text" id="dishName" name="dishName" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+    <h2>Recommended Dishes:</h2>
+    <ul id="recommendedDishes"></ul>
+
+    <script>
+        document.getElementById("recommendationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var dishName = document.getElementById("dishName").value;
+            getRecommendedDishes(dishName);
+        });
+
+        function getRecommendedDishes(dishName) {
+            fetch('/recommend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 'name': dishName })
+            })
+            .then(response => response.json())
+            .then(data => {
+                var recommendedDishes = data.recommended_dishes;
+                displayRecommendedDishes(recommendedDishes);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function displayRecommendedDishes(dishes) {
+            var ul = document.getElementById("recommendedDishes");
+            ul.innerHTML = ""; // Clear the existing list
+
+            dishes.forEach(function(dish) {
+                var li = document.createElement("li");
+                li.textContent = dish;
+                ul.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
